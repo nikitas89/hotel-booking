@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  booking_day: 2017-12-21
+  duration: 1
+  quantity: 1
+  user: one
+  room: one
+
+two:
+  booking_day: 2017-12-21
+  duration: 1
+  quantity: 1
+  user: two
+  room: two

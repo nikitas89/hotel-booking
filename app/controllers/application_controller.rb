@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
+  # protect_from_forgery with: null_session
+
   include Knock::Authenticable
-  protect_from_forgery with: :exception
+  # include ActionController::Serialization
+
+  # before_action :authenticate
 
  protected
 
