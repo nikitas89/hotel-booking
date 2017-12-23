@@ -13,16 +13,29 @@
 ##Front end usage guide
 1. Postico
 Post request for login format
-{"auth":{"email": "admin@hotelbooking.com","password" : "admin123"}}
+Body, raw, must be json type.
+{"auth": {"email": "admin@hotelbooking.com","password" : "admin123"}}
+{"auth": {"email": "user@hotelbooking.com", "password" : "test123"}}
+
 
 User:
 user@hotelbooking.com
 test123
 
+
+Send booking creation data
+booking[booking_day]:"2017-12-24"
+booking[duration]:4
+booking[quantity]:5
+booking[room_id]:2
+
+
 ##ERD
 
 ##API Endpoints
 
+
+Read only non authenticated.
 
 
 
