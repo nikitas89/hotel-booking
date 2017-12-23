@@ -16,7 +16,9 @@ class BookingsController < ApplicationController
   # GET /bookings/1
   # GET /bookings/1.json
   def show
-    render json: Booking.find(params[:id]), :except => [:user]
+    # render json: Booking.find(params[:id]), :except => [:user]
+     #how to do except user?
+     render json: set_booking
   end
 
   # GET /bookings/new
@@ -104,7 +106,19 @@ class BookingsController < ApplicationController
   # DELETE /bookings/1
   # DELETE /bookings/1.json
   def destroy
+    #TODO transaction. rollbackk if one fails.
+    # update ava record to add quantity from booking
+    set_booking
+    @availability  = @booking.room.availabilities.where(available_day:@booking.booking_day).first
+    puts @availability
+    puts @availability.to_s
+    # @availability.quantity = @availability.quantity + @booking.quantity
+    updated_quantity = @availability.quantity + @booking.quantity
+    # puts @availability.quantity
     @booking.destroy
+    @availability.update(quantity:updated_quantity)
+    @availability.save
+
     respond_to do |format|
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
       format.json { head :no_content }
