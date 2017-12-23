@@ -18,7 +18,7 @@ class BookingsController < ApplicationController
   def show
     # render json: Booking.find(params[:id]), :except => [:user]
      #how to do except user?
-     render json: set_booking
+     render json: @booking
   end
 
   # GET /bookings/new
@@ -89,35 +89,26 @@ class BookingsController < ApplicationController
     # end
   end
 
-  # PATCH/PUT /bookings/1
+
   # PATCH/PUT /bookings/1.json
   def update
-    respond_to do |format|
-      if @booking.update(booking_params)
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
-        format.json { render :show, status: :ok, location: @booking }
+      if @booking.booking_day>Date.today && @booking.update(booking_params)
+        render :show, status: :ok, location: @booking
       else
-        format.html { render :edit }
-        format.json { render json: @booking.errors, status: :unprocessable_entity }
+        #include error message that it could not be updated.
+        render json: @booking.errors, status: :unprocessable_entity
       end
-    end
   end
 
-  # DELETE /bookings/1
+
   # DELETE /bookings/1.json
   def destroy
     #TODO transaction. rollbackk if one fails.
     # update ava record to add quantity from booking
-    set_booking
     @availability  = @booking.room.availabilities.where(available_day:@booking.booking_day).first
-    puts @availability
-    puts @availability.to_s
-    # @availability.quantity = @availability.quantity + @booking.quantity
     updated_quantity = @availability.quantity + @booking.quantity
-    # puts @availability.quantity
     @booking.destroy
     @availability.update(quantity:updated_quantity)
-    @availability.save
 
     respond_to do |format|
       format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
@@ -129,9 +120,9 @@ class BookingsController < ApplicationController
     def set_booking
       @booking = Booking.find(params[:id])
     end
-#http://vicfriedman.github.io/blog/2015/07/18/create-multiple-objects-from-single-form-in-rails/
     def booking_params
       #:user_id, not sure to remove or include. did not get error either way.
       params.require(:booking).permit(:user_id,:booking_day, :duration, :quantity, :room_id)
     end
+
 end
