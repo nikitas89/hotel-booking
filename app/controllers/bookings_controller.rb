@@ -31,7 +31,6 @@ class BookingsController < ApplicationController
   # POST /bookings.json
   def create
     invalid_booking = false
-    # puts booking_params
     duration =  params[:booking][:duration].to_i
     quantity =  params[:booking][:quantity].to_i
     bk_day = params[:booking][:booking_day]

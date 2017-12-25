@@ -1,5 +1,13 @@
 # Hotel Booking API on Rails 5, Postgresql
 
+## Features
+CMS for admin for CRUD of rooms
+API
+1. List rooms availability for all, day and range
+2. Book rooms for multiple quantity and days
+3. Cancel/Edit bookings 
+
+
 ## How to use - locally
 1. rails db:setup
 2. rails db:seed (adds admin, user, and availabilities data)
@@ -47,7 +55,31 @@ booking[room_id]:2
   GET /availabilities/range/:dates
   e.g. /availabilities/range/2017-12-23&2017-12-24
   Show room availabilities in range
-
-  
 ```
-Read only: non-authenticated
+```
+  Index bookings:
+  Get /bookings
+
+  Show booking
+  GET /bookings/:id
+```
+```
+***USER TOKEN MUST BE SET IN HEADER ***
+  To Create Bookings:
+  POST /bookings
+  Header:
+  Authorization with Bearer token,
+  Accept: application/json, text/plain, */*,
+  Content-Type:[{"key":"Content-Type","value":"application/json","description":"","enabled":true}]
+  Form Body: booking[booking_day], booking[duration], booking[quantity], booking[room_id]  
+
+  Update booking
+  PATCH/PUT /bookings/:id
+  Same as POST; only use fields to be updated
+
+  Delete booking
+  Delete /bookings/:id
+  Set Header to be same as POST
+
+```
+Non-authenticated actions are Read-only
