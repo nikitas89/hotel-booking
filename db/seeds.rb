@@ -4,28 +4,26 @@
 #ava: id.  available day. quantity mathces room's quantity.
 #booking.
 
-require 'date'
-#
-# end_date = Date.today + 30
-# date_range = Date.today..end_date
-#
-# date_range.each {|date|
-#   Room.all.each do |room|
-#     room.availabilities.create(available_day: date, quantity: room.quantity)
-#   end
-#
-# }
-# admin = User.new
-# admin.email = 'admin@hotelbooking.com'
-# admin.password = 'admin123'
-# admin.password_confirmation = 'admin123'
-# admin.admin = true
-# admin.save
-#
-# user = User.new
-# user.email = 'user@hotelbooking.com'
-# user.password = 'test123'
-# user.password_confirmation = 'test123'
-# user.save
+admin = Admin.new
+admin.email = 'admin_manager@hotelbooking.com'
+admin.password = 'tester123'
+admin.password_confirmation = 'tester123'
+admin.save
 
-# (10..15).each {|n| print n, ' ' }
+user = User.new
+user.email = 'user@hotelbooking.com'
+user.password = 'test123'
+user.password_confirmation = 'test123'
+user.save
+
+
+require 'date'
+end_date = Date.today + 30
+date_range = Date.today..end_date
+
+date_range.each {|date|
+  Room.all.each do |room|
+    room.availabilities.create(available_day: date, quantity: room.quantity)
+  end
+
+}

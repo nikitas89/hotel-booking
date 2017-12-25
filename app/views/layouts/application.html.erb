@@ -9,6 +9,15 @@
   </head>
 
   <body>
+    <!-- <p class="notice"><%= notice %></p> -->
+    <!-- <p class="alert"><%= alert %></p> -->
+  <%if !admin_signed_in?%>
+  <%=link_to "Sign_up", new_admin_registration_path%>
+  <%=link_to "Sign_in", new_admin_session_path%>
+  <%else admin_signed_in?%>
+    <!-- <%=link_to "Add_new", new_admin_registration_path%> -->
+    <%=link_to "Sign_out", destroy_admin_session_path,:method => :delete %>
+  <%end%>
     <%= yield %>
   </body>
 </html>
