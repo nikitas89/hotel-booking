@@ -18,10 +18,15 @@ Body, raw, must be json type.
 {"auth": {"email": "user@hotelbooking.com", "password" : "test123"}}
 
 
+
+
 User:
 user@hotelbooking.com
 test123
 
+
+Sign up
+{"user": {"email":"nikita@hotelbooking.com", "password_digest":"tester123", "admin":"false"}}
 
 Send booking creation data
 booking[booking_day]:"2017-12-24"

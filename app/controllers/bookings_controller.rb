@@ -10,7 +10,10 @@ class BookingsController < ApplicationController
       @bookings = Booking.all
       #dont show user details in response
       render json: @bookings, :except => [:user]
+    else
+      render json: current_user.bookings, :except => [:user]
     end
+
   end
 
   # GET /bookings/1
@@ -22,19 +25,19 @@ class BookingsController < ApplicationController
   end
 
   # GET /bookings/new
-  def new
-    @booking = current_user.bookings.build
-  end
+  # def new
+  #   @booking = current_user.bookings.build
+  # end
 
   # GET /bookings/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /bookings
   # POST /bookings.json
   def create
     invalid_booking = false
-    puts booking_params
+    # puts booking_params
     duration =  params[:booking][:duration].to_i
     quantity =  params[:booking][:quantity].to_i
     bk_day = params[:booking][:booking_day]
@@ -46,25 +49,26 @@ class BookingsController < ApplicationController
 
       #check Availability for  room on each day and given quantity
       #22-12 - dont cater to mutiple room types in one post
-      #if all availble for all days, create bookings and save. Reduce availaility quantity for each day.
-
+      #if all available for all days, create bookings and save. Reduce Availability quantity for each day.
 
     (bk_day..last_day).each {|day|
+      # check_available = @booking.room.availabilities.where(available_day:@booking.booking_day).where("quantity>?",quantity).first
+      # puts check_available.quantity if check_available
       available = Availability.where(available_day:day).where(room_id:room).where("quantity>?",quantity).first
-
+      puts "****************************************"
+      # check_available = Availability.by_booking(booking_params).first
+       # where(available_day:day).where(room_id:room).where("quantity>?",quantity).first
+      puts "****************************************"
       if available
-        puts available.id
         #build on params and given date.
+        #then add to array of bookings
         @booking = current_user.bookings.build(booking_params)
         @booking.booking_day = day
-        #then add to array of bookings
         @bookings << @booking
-        available.quantity = available.quantity - quantity.to_i
+        available.quantity = available.quantity - quantity
         @availability_update << available
       else
         invalid_booking = true
-        puts day
-        puts 'not available'
         break
       end
      }
