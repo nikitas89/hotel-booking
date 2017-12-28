@@ -8,40 +8,33 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
-    <!-- <p class="notice"><%= notice %></p> -->
-    <!-- <p class="alert"><%= alert %></p> -->
-    <!-- As a heading -->
+  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <!-- <a class="navbar-brand" href="index.html">Start Bootstrap</a> -->
+      <%=link_to "Hotel Booking", rooms_path, class:"navbar-brand"%>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <ul class="navbar-nav ml-auto">
+      <%if !admin_signed_in?%>
+      <li class="nav-item mr-auto">
+      <%=link_to "Sign up", new_admin_registration_path, class:"nav-link"%>
+      </li>
+      <li class="nav-item">
+      <%=link_to "Sign in", new_admin_session_path, class:"nav-link"%>
+      </li>
+      <%else admin_signed_in?%>
+      <li class="nav-item">
+        <!-- <a class="nav-link" data-toggle="modal" data-target="#exampleModal"></a> -->
+          <i class="fa fa-fw fa-sign-out"></i>
+      <%=link_to "Sign out", destroy_admin_session_path,:method => :delete, class:"nav-link"%>
+      </li>
+      <%end%>
+    </ul>
+  </div>
+</nav>
 
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded ">
-    <div class="navbar-header">
-          <%=link_to "Hotel Booking", rooms_path, class:"navbar-brand"%>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-          <ul class="navbar-nav mr-auto container-fluid">
-            <%if !admin_signed_in?%>
-            <li class="nav-item mr-auto">
-            <%=link_to "Sign_up", new_admin_registration_path, class:"nav-link"%>
-            </li>
-            <li class="nav-item">
-            <%=link_to "Sign_in", new_admin_session_path, class:"nav-link"%>
-            </li>
-            <%else admin_signed_in?%>
-            <!-- <%=link_to "Add_new", new_admin_registration_path%> -->
-            <li class="nav-item">
-            <%=link_to "Sign_out", destroy_admin_session_path,:method => :delete , class:"nav-link"%>
-            </li>
-            <%end%>
-          </ul>
-        </div>
-      </div>
-  </nav>
   <div class="container">
     <%= yield %>
   </div>
