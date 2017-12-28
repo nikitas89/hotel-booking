@@ -2,22 +2,48 @@
 <html>
   <head>
     <title>HotelBooking</title>
-    <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
     <!-- <p class="notice"><%= notice %></p> -->
     <!-- <p class="alert"><%= alert %></p> -->
-  <%if !admin_signed_in?%>
-  <%=link_to "Sign_up", new_admin_registration_path%>
-  <%=link_to "Sign_in", new_admin_session_path%>
-  <%else admin_signed_in?%>
-    <!-- <%=link_to "Add_new", new_admin_registration_path%> -->
-    <%=link_to "Sign_out", destroy_admin_session_path,:method => :delete %>
-  <%end%>
+    <!-- As a heading -->
+
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded ">
+    <div class="navbar-header">
+          <%=link_to "Hotel Booking", rooms_path, class:"navbar-brand"%>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+          <ul class="navbar-nav mr-auto container-fluid">
+            <%if !admin_signed_in?%>
+            <li class="nav-item mr-auto">
+            <%=link_to "Sign_up", new_admin_registration_path, class:"nav-link"%>
+            </li>
+            <li class="nav-item">
+            <%=link_to "Sign_in", new_admin_session_path, class:"nav-link"%>
+            </li>
+            <%else admin_signed_in?%>
+            <!-- <%=link_to "Add_new", new_admin_registration_path%> -->
+            <li class="nav-item">
+            <%=link_to "Sign_out", destroy_admin_session_path,:method => :delete , class:"nav-link"%>
+            </li>
+            <%end%>
+          </ul>
+        </div>
+      </div>
+  </nav>
+  <div class="container">
     <%= yield %>
+  </div>
   </body>
 </html>

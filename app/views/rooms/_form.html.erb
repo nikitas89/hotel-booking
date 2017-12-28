@@ -1,42 +1,52 @@
 <%= form_with(model: room, local: true) do |form| %>
-  <% if room.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+  <div class="form-group">
+    <div class="form-row">
+      <div class="col-md-12">
+        <% if room.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+            <ul>
+            <% room.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-      <ul>
-      <% room.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+      <div class="field form-group">
+        <%= form.label :roomType %>
+        <%= form.text_field :roomType, class: "form-control", id: :room_roomType, placeholder: "Room Type e.g. Family room" %>
+      </div>
+
+      <div class="field form-group">
+        <%= form.label :description %>
+        <%= form.text_area :description, class: "form-control", id: :room_description, placeholder: "Description of room" %>
+      </div>
+
+      <div class="field form-group">
+        <%= form.label :image %>
+        <%= form.text_area :image, class: "form-control", id: :room_image,placeholder: "url of image" %>
+      </div>
+
+      <div class="field form-group">
+        <div class="form-row">
+          <div class="col-md-6">
+            <%= form.label :quantity %>
+            <%= form.number_field :quantity, class: "form-control",  id: :room_quantity,placeholder: "Quantity of rooms" %>
+          </div>
+          <div class="col-md-6">
+            <%= form.label :price %>
+            <%= form.text_field :price, class: "form-control", id: :room_price, placeholder: "Price per night" %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="actions btn btn-block">
+        <!-- <a class="btn btn-primary btn-block" href="login.html">Register</a> -->
+        <%= form.submit %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :roomType %>
-    <%= form.text_field :roomType, id: :room_roomType %>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :room_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_area :image, id: :room_image %>
-  </div>
-
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.number_field :quantity, id: :room_quantity %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :room_price %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

@@ -1,35 +1,54 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Rooms</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Roomtype</th>
-      <th>Description</th>
-      <th>Image</th>
-      <th>Quantity</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rooms.each do |room| %>
-      <tr>
-        <td><%= room.roomType %></td>
-        <td><%= room.description %></td>
-        <td><img width="200px" src="<%= room.image %>"></td> 
-        <td><%= room.quantity %></td>
-        <td><%= room.price %></td>
-        <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Room', new_room_path %>
+<!-- <h1>Rooms</h1> -->
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Admin dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">Hotels</li>
+    </ol>
+    <%= link_to 'New Room', new_room_path %>
+    <!-- <div class="card mb-3"> -->
+      <!-- <div class="card-header">
+        <i class="fa fa-table"></i> Hotel bookings
+      </div> -->
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered"  width="100%" cellspacing="0">
+            <!-- use this to add number of rows and search bar -->
+            <!-- id="dataTable" -->
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Room Type</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <!-- <th colspan="3"></th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <% @rooms.each do |room| %>
+                <tr>
+                  <td><%= room.id %></td>
+                  <td><%= link_to room.roomType, room %></td>
+                  <td><%= room.description %></td>
+                  <td><img width="200px" src="<%= room.image %>"></td>
+                  <td><%= room.quantity %></td>
+                  <td><%= room.price %></td>
+                  <!-- <td><%= link_to 'Show', room %></td> -->
+                  <!-- <td><%= link_to 'Edit', edit_room_path(room) %></td> -->
+                  <!-- <td><%= link_to 'Delete', room, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <!-- </div> -->
+  </div>
+</div>
