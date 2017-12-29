@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
 
   devise_for :admins
-  get '/admins/add_new' =>'admins#new'
-  resources :admins, except: [:destroy, :edit, :update  ]
+  resources :admins, except: [:destroy, :edit, :update, :show  ]
   resources :bookings
   resources :rooms
   get '/availabilities/:date' => 'availabilities#show'

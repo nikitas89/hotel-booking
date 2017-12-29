@@ -1,2 +1,36 @@
-<h1>Admins#new</h1>
-<p>Find me in app/views/admins/new.html.erb</p>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Create Admin</div>
+      <div class="card-body">
+        <%= form_with(model: @admin, local: true) do |f| %>
+          <div class="form-group">
+
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+<!--
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div> -->
+
+          <div class="actions">
+            <%= f.submit "Create Admin" %>
+          </div>
+        <% end %>
+        </div>
+        <%= link_to 'Back', rooms_path %>
+    </div>
+  </div>
+</div>

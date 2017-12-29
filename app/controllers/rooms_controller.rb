@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   # before_action :authenticate_user
   # to activate in production
-  # before_action :authenticate_admin!
+  before_action :authenticate_admin!
 
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
