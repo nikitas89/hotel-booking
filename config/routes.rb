@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  post 'add_admin' => 'admins#create'
   devise_for :admins
   resources :admins, except: [:destroy, :edit, :update, :show  ]
   resources :bookings
